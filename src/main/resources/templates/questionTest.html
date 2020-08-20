@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+    <th:block th:if="${answerPage == false}">
+        <h2>Complete the sentence.</h2>
+        <th:block th:with="question = ${randomQuestions.get(randomNumber)}">
+            <p th:text="${question.question}"></p>
+            <th:block th:each="q : ${randomQuestions}">
+                <div style="margin-top: 10px;">
+                    <form th:action="@{/u/question_test}" method="post">
+                        <input type="hidden" name="qSentence" th:value="${question.getQuestion()}">
+                        <input type="hidden" name="qAnswer" th:value="${q.getAnswer().getWord()}">
+                        <button type="submit" class="btn-answer" th:text="${randomQuestions.indexOf(q)} + 1"></button>
+                        <span th:text="${q.getAnswer().getWord()}"></span>
+                    </form>
+                </div>
+            </th:block>
+        </th:block>
+    </th:block>
+
+    <th:block th:if="${answerPage == true}">
+        <h2 style="color: green;" th:if="${correctAnswer == true}">Your answer is correct</h2>
+        <h2 style="color: red;" th:if="${correctAnswer == false}">Your answer is wrong</h2>
+
+        <h3>Sentence: <span th:text="${answer.getQuestion()}"></span></h3>
+        <h3>Answer: <span th:text="${answer.getAnswer().getWord()}"></span></h3>
+        <h4>Definition: <span th:text="${answer.getAnswer().getDefinition()}"></span></h4>
+        <p> Examples: <span th:text="${answer.getAnswer().getExample()}"></span></p>
+        <br>
+        <a th:href="${wordLink}" target="_blank">More information about <span th:text="${answer.getAnswer().getWord()}"></span></a>
+        <br><br>
+        <a href="/u/question_test">Take test again</a>
+    </th:block>
+
+    <br><br>
+    <a href="/">return to menu</a>
+</body>
+</html>

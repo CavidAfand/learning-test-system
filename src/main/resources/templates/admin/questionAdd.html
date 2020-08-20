@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <th:block th:if="${wrongWord == true}">
+        <h2 style="color: red;">Your entered word is wrong or it doesn't exist in our database.</h2>
+    </th:block>
+
+    <th:block th:if="${success == false}">
+        <h2 style="color: red;">Something went wrong.</h2>
+    </th:block>
+
+    <th:block th:if="${success == true}">
+        <h2 style="color: green;">Question was added successfully.</h2>
+    </th:block>
+
+    <h2>Add new question</h2>
+    <form th:action="@{/a/question_add}" method="post">
+
+        <label for="question">Question</label><br>
+        <textarea type="text" name="question" id="question" required></textarea><br><br>
+
+        <label for="answer">Answer</label><br>
+        <input type="text" name="answer" id="answer" required><br><br>
+
+        <button type="submit">Save</button>
+
+    </form>
+
+    <br><br>
+
+    <a href="/">return to menu</a>
+
+</body>
+</html>

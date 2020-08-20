@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+    <th:block th:if="${answerPage == false}">
+        <h2>Find word with its definition</h2>
+        <th:block th:with="number = ${randomNumber}, question = ${randomWords.get(randomNumber)}">
+            <p style="font-size: 21px">Find correct <u>word</u> with its definition: <i><b th:text="${question.getDefinition()}"></b></i></p>
+            <th:block th:each="word : ${randomWords}">
+                <div style="margin-top: 10px;">
+                    <form th:action="@{/u/definitiontest}" method="post">
+                        <input type="hidden" name="qDefiniton" th:value="${question.getDefinition()}">
+                        <input type="hidden" name="aWord" th:value="${word.getWord()}">
+                        <button type="submit" class="btn-answer" th:text="${randomWords.indexOf(word) + 1}"></button>
+                        <span th:text="${word.getWord()}"></span>
+                    </form>
+                </div>
+            </th:block>
+        </th:block>
+    </th:block>
+    <th:block th:if="${answerPage == true}">
+        <th:block th:if="${checkAnswer == true}">
+            <h2 style="color: green;">Your answer is correct.</h2>
+        </th:block>
+        <th:block th:if="${checkAnswer == false}">
+            <h2 style="color: red;">Your answer is false.</h2>
+        </th:block>
+        <h3>Word: <span th:text="${correctWord.getWord()}"></span></h3>
+        <h4>Definition: <span th:text="${correctWord.getDefinition()}"></span></h4>
+        <h5>Examples: <span th:text="${correctWord.getExample()}"></span></h5>
+        <p><a th:href="${wordLink}" target="_blank">More information about <span th:text="${correctWord.getWord()}"></span></a></p>
+
+        <a href="/u/definitiontest">Take test again</a>
+    </th:block>
+
+    <br><br>
+    <a href="/">return to menu</a>
+</body>
+</html>

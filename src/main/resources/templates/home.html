@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+    <h2>Home page</h2>
+    <div>
+        <p>Select test version:
+            <a class="btn" href="/u/definitiontest">Find correct word with definition</a>
+            <a class="btn" href="/u/wordtest">Find correct definition for word</a>
+            <a class="btn" href="/u/question_test">Find correct word for sentence</a>
+            <th:block th:if="${admin == true}">
+                <br><br>
+                <a class="btn" href="/a/question_add">Add question</a>
+                <a class="btn" href="/a/user_add">Add user</a>
+                <a class="btn" href="/a/word_add">Add word</a>
+            </th:block>
+        </p>
+    </div>
+    <form th:action="@{/logout}" method="post">
+        <button class="btn" type="submit">Logout</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+package com.forfuture.repeatsecurity;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class RepeatSecurityApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(RepeatSecurityApplication.class, args);
+    }
+
+}
