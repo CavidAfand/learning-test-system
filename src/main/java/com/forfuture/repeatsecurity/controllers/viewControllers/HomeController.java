@@ -17,16 +17,12 @@ import java.util.List;
 @RequestMapping("/")
 public class HomeController {
 
-//    @GetMapping
-//    public String getHomeController(Authentication authentication, Model model) {
-//        List<Role> roles = (List<Role>) authentication.getAuthorities();
-//        model.addAttribute("admin", roles.get(0).getAuthority().equalsIgnoreCase("admin"));
-//        return "home";
-//    }
-
     @GetMapping
-    public String GoHomePage() {
-        return "It work";
+    public String getHomeController(Authentication authentication, Model model) {
+        List<Role> roles = (List<Role>) authentication.getAuthorities();
+        model.addAttribute("admin", roles.get(0).getAuthority().equalsIgnoreCase("admin"));
+        return "home";
     }
+
 
 }
