@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -54,8 +56,11 @@ public class WordService {
     }
 
     public Word findWordByDefinition(String definition) {
-        Word packet = wordRepository.findByDefinition(definition);
-        return packet;
+        List <Word> allWords = wordRepository.findAll();
+        return allWords.stream().filter(i -> i.getDefinition().equalsIgnoreCase(definition)).findFirst().get();
+//        return packet;
     }
+
+
 
 }

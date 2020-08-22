@@ -33,10 +33,14 @@ public class QuestionTestController {
 
     @PostMapping
     public String checkAnswer(Model model, @RequestParam("qSentence") String qSentence, @RequestParam("qAnswer") String userAnswer) {
-        Question question = questionService.findQuestion(qSentence);
-        if (question.getAnswer().getWord().equalsIgnoreCase(userAnswer)) {
-            model.addAttribute("correctAnswer", true);
-        }
+//        Question question = questionService.findQuestion(qSentence);
+//        if (question.getAnswer().getWord().equalsIgnoreCase(userAnswer)) {
+//            model.addAttribute("correctAnswer", true);
+//        }
+//        else model.addAttribute("correctAnswer", false);
+        List <Question> allQuestion = questionService.getAllQuestions();
+        Question question = allQuestion.stream().filter(i -> i.getAnswer().getWord().equalsIgnoreCase(userAnswer)).findFirst().get();
+        if (question != null) model.addAttribute("correctAnswer", true);
         else model.addAttribute("correctAnswer", false);
         model.addAttribute("answerPage", true);
         model.addAttribute("answer", question);

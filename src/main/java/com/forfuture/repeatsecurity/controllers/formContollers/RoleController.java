@@ -21,7 +21,7 @@ public class RoleController {
     @PostMapping
     public String addRolePost(@RequestParam("role") String role) {
         roleService.addRole(new Role(role));
-        return "redirect:/logout";
+        return "redirect:/a/role_add";
     }
 
 }

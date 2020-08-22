@@ -34,7 +34,7 @@ public class UserFormController {
         Role role = roleService.getRoleById(roleId);
         user.setRole(role);
         userService.saveUser(user);
-        return "redirect:/logout";
+        return "redirect:/a/user_add";
     }
 
 }
